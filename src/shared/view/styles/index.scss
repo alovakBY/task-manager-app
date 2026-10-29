@@ -1,0 +1,40 @@
+@use 'colors-themed-vars';
+@use 'font-face';      
+
+html {
+  height: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 500;
+  height: 100%;
+  margin: 0;
+  background-color: var(--color-themed-main-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  color: var(--color-themed-text);
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 100%;
+  isolation: isolate;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+* {
+  font-family: inherit;
+  box-sizing: border-box;
+}

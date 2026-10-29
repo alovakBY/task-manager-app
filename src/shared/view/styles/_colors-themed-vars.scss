@@ -1,0 +1,45 @@
+@mixin light-theme-variables {
+  --color-themed-main-background: #e7e5eb;
+  --color-themed-secondary-background: var(--color-white);
+  --color-themed-text: var(--color-black);
+  --color-themed-gray-text: var(--color-lm-gray-text);
+  --color-themed-red: var(--color-red-primary-day);
+  --color-themed-orange: var(--color-orange);
+  --color-indicator-overdue: var(--color-red-primary-day); // Красный индикатор из ТЗ
+  --color-indicator-warning: var(--color-yellow);            // Жёлтый индикатор из ТЗ
+  color-scheme: light;
+}
+
+@mixin dark-theme-variables {
+  --color-themed-main-background: #161617;
+  --color-themed-secondary-background: var(--color-black-night);
+  --color-themed-text: var(--color-white);
+  --color-themed-gray-text: #8a8a8b;
+  --color-themed-red: var(--color-red);
+  --color-themed-orange: var(--color-orange);
+  --color-indicator-overdue: var(--color-red);
+  --color-indicator-warning: #d4b106;
+  color-scheme: dark;
+}
+
+// Применяем миксины к явным темам
+:root[data-theme='light'] {
+  @include light-theme-variables;
+}
+
+:root[data-theme='dark'] {
+  @include dark-theme-variables;
+}
+
+// Настройка системного режима (system) в зависимости от настроек ОС
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='system'] {
+    @include dark-theme-variables;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme='system'] {
+    @include light-theme-variables;
+  }
+}
