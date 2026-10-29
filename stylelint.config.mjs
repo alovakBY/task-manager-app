@@ -200,4 +200,10 @@ export default {
       'box-decoration-break',
     ],
   },
+  overrides: [
+    {
+      files: ['**/*.scss'],
+      customSyntax: 'postcss-scss',
+    },
+  ],
 };

@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 2px;
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  background-color: var(--gray01);
+  gap: 4px;
+}
+
+.item {
+  font-size: 14px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+  border-radius: 8px;
+  outline: none;
+  gap: 4px;
+
+  &:hover:not(.active) {
+    color: var(--text-main);
+    background-color: var(--bg-main);
+  }
+
+  &.active {
+    font-weight: 600;
+    background-color: var(--brand);
+  }
+}

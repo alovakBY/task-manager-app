@@ -8,9 +8,9 @@ type Props = {
   storageKey?: string;
 };
 
-const ThemeProviderContext = createContext<ThemeProviderState | undefined>(
-  undefined,
-);
+export const ThemeProviderContext = createContext<
+  ThemeProviderState | undefined
+>(undefined);
 
 export const ThemeProvider: FC<Props> = ({
   children,

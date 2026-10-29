@@ -1,32 +1,47 @@
-@use './colors'; 
+@use './colors';
 
 @mixin light-theme-variables {
-  --bg-main: #f4f4f5;             
-  --bg-surface: var(--white);       
-  --text-main: var(--black);       
-  --text-muted: var(--gray);        
-  --color-danger: var(--red);      
-  --color-warning: var(--yellow);   
+  --bg-main: #fcfcfc;
+  --bg-surface: var(--white);
+  --text-main: var(--black);
+  --text-muted: var(--gray);
+  --color-danger: var(--red);
+  --color-warning: var(--yellow);
+  --color-main: #313131;
+  --border-main: #e4e4e7;
+  --gray01: #7f7f7f;
   color-scheme: light;
 }
 
 @mixin dark-theme-variables {
-  --bg-main: #09090b;              
-  --bg-surface: #18181b;           
-  --text-main: var(--white);        
-  --text-muted: #a1a1aa;           
-  --color-danger: var(--red);      
-  --color-warning: #eab308;        
+  --bg-main: #09090b;
+  --bg-surface: #18181b;
+  --text-main: var(--white);
+  --text-muted: #a1a1aa;
+  --color-danger: var(--red);
+  --color-warning: #eab308;
+  --border-main: #27272a;
+  --color-main: #e9e9e9;
+  --gray01: #8a8a8b;
   color-scheme: dark;
 }
 
-:root[data-theme='light'] { @include light-theme-variables; }
-:root[data-theme='dark'] { @include dark-theme-variables; }
+:root[data-theme='light'] {
+  @include light-theme-variables;
+}
+
+:root[data-theme='dark'] {
+  @include dark-theme-variables;
+}
 
 @media (prefers-color-scheme: dark) {
-  :root[data-theme='system'] { @include dark-theme-variables; }
+  :root[data-theme='system'] {
+    @include dark-theme-variables;
+  }
 }
 
 @media (prefers-color-scheme: light) {
-  :root[data-theme='system'] { @include light-theme-variables; }
+  :root[data-theme='system'] {
+    @include light-theme-variables;
+  }
 }

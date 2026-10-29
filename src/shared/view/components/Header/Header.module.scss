@@ -1,0 +1,19 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border-main);
+}
+
+.logo-wrapper {
+  color: var(--brand);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+}
