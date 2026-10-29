@@ -15,9 +15,5 @@ export const AppLayout = () => {
     return <Navigate to={`/${PATHS.LOGIN}`} replace />;
   }
 
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  return <Outlet />;
 };

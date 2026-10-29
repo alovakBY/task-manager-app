@@ -1,5 +1,7 @@
-@use 'colors-themed-vars';
-@use 'font-face';      
+@use './colors';   
+@use './colors-themed-vars' ; 
+@use './font-face';   
+
 
 html {
   height: 100%;
@@ -11,13 +13,12 @@ body {
   font-weight: 500;
   height: 100%;
   margin: 0;
-  background-color: var(--color-themed-main-background);
+ background-color: var(--bg-main);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-  color: var(--color-themed-text);
+  color: var(--text-main);
   box-sizing: border-box;
   height: 100%;
   min-height: 100%;

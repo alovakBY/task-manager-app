@@ -5,20 +5,24 @@ import { AppLayout } from './AppLayout';
 import { PATHS } from './constants';
 
 const LoginPage = lazy(() =>
-  import('@/pages/Login').then((module) => ({ default: module.Login })),
+  import('@/pages/Login/LoginPage').then((module) => ({
+    default: module.LoginPage,
+  })),
 );
 const ListsPage = lazy(() =>
-  import('@/pages/Lists').then((module) => ({ default: module.Lists })),
+  import('@/pages/Lists/ListsPage').then((module) => ({
+    default: module.ListsPage,
+  })),
 );
 const ListDetailPage = lazy(() =>
-  import('@/pages/ListDetail').then((module) => ({
-    default: module.ListDetail,
+  import('@/pages/ListDetail/ListDetailPage').then((module) => ({
+    default: module.ListDetailPage,
   })),
 );
 
 const TaskDetailPage = lazy(() =>
-  import('@/pages/TaskDetail').then((module) => ({
-    default: module.TaskDetail,
+  import('@/pages/TaskDetail/TaskDetailPage').then((module) => ({
+    default: module.TaskDetailPage,
   })),
 );
 

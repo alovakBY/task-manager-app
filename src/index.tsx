@@ -1,7 +1,18 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { ThemeProvider } from '@shared/view/providers/ThemeProvider/ThemeProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { Root } from './Root';
+import { AppRouter } from './routes';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+    },
+  },
+});
 
 import '@/shared/view/styles/index.scss';
 
@@ -21,7 +32,11 @@ const rootElement = createRoot(container!);
 enableMocking().then(() => {
   rootElement.render(
     <StrictMode>
-      <Root />
+      <ThemeProvider defaultTheme="system" storageKey="app-theme">
+        <QueryClientProvider client={queryClient}>
+          <AppRouter />
+        </QueryClientProvider>
+      </ThemeProvider>
     </StrictMode>,
   );
 });
