@@ -1,8 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
-import { AppLayout } from './AppLayout';
 import { PATHS } from './constants';
+import { ProtectedRoute } from './ProtectedRoute';
+import { AppLayout } from '../shared/view/Layouts/AppLayout/AppLayout';
 
 const LoginPage = lazy(() =>
   import('@/pages/Login/LoginPage').then((module) => ({
@@ -34,10 +35,6 @@ const withSuspense = (Component: React.ComponentType) => (
 
 const routerConfig = createBrowserRouter([
   {
-    path: PATHS.LOGIN,
-    element: withSuspense(LoginPage),
-  },
-  {
     path: PATHS.BASE,
     element: <AppLayout />,
     children: [
@@ -46,16 +43,25 @@ const routerConfig = createBrowserRouter([
         element: <Navigate replace to={PATHS.LISTS} />,
       },
       {
-        path: PATHS.LISTS,
-        element: withSuspense(ListsPage),
+        path: PATHS.LOGIN,
+        element: withSuspense(LoginPage),
       },
       {
-        path: PATHS.LIST_DETAIL,
-        element: withSuspense(ListDetailPage),
-      },
-      {
-        path: PATHS.TASK_DETAIL,
-        element: withSuspense(TaskDetailPage),
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: PATHS.LISTS,
+            element: withSuspense(ListsPage),
+          },
+          {
+            path: PATHS.LIST_DETAIL,
+            element: withSuspense(ListDetailPage),
+          },
+          {
+            path: PATHS.TASK_DETAIL,
+            element: withSuspense(TaskDetailPage),
+          },
+        ],
       },
     ],
   },

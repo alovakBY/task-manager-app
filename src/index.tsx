@@ -1,6 +1,5 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Header } from '@shared/view/components/Header/Header';
 import { ThemeProvider } from '@shared/view/providers/ThemeProvider/ThemeProvider';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
@@ -35,7 +34,6 @@ enableMocking().then(() => {
     <StrictMode>
       <ThemeProvider>
         <QueryClientProvider client={queryClient}>
-          <Header />
           <AppRouter />
         </QueryClientProvider>
       </ThemeProvider>

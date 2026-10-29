@@ -1,4 +1,4 @@
-import { createContext, type FC, use, useEffect, useState } from 'react';
+import { createContext, type FC, useEffect, useState } from 'react';
 
 import type { Theme, ThemeProviderState } from './types';
 
