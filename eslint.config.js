@@ -7,6 +7,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import prettier from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
 import eslintReact from '@eslint-react/eslint-plugin';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default defineConfig(
   { ignores: ['dist', 'node_modules'] },
@@ -14,7 +15,7 @@ export default defineConfig(
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
-      eslintReact.configs.recommended, // Включаем правила нового плагина React
+      eslintReact.configs.recommended,
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
@@ -36,8 +37,6 @@ export default defineConfig(
         'warn',
         { allowConstantExport: true },
       ],
-
-      // Ваши правила сортировки импортов и экспортов
       'simple-import-sort/exports': 'error',
       'react-hooks/exhaustive-deps': 'error',
 
@@ -45,7 +44,8 @@ export default defineConfig(
         'error',
         {
           groups: [
-            ['^react', '^@?\\w'],
+            ['^react', '^(?!@/)(^@?\\w)'],
+            ['^@/'],
             ['^(shared|PlaceOrder)'],
             ['^\\./', '^\\..?'],
             ['^.*\\.module\\.scss$'],
@@ -54,5 +54,6 @@ export default defineConfig(
       ],
     },
   },
+  ...pluginQuery.configs['flat/recommended'],
   prettier,
 );

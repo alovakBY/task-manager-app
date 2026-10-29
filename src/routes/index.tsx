@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
 import { AppLayout } from './AppLayout';
 import { PATHS } from './constants';
@@ -28,7 +28,7 @@ const withSuspense = (Component: React.ComponentType) => (
   </Suspense>
 );
 
-export const router = createBrowserRouter([
+const routerConfig = createBrowserRouter([
   {
     path: PATHS.LOGIN,
     element: withSuspense(LoginPage),
@@ -56,3 +56,7 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+export const AppRouter = () => {
+  return <RouterProvider router={routerConfig} />;
+};
