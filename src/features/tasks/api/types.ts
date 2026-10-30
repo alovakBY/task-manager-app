@@ -8,5 +8,5 @@ export type TaskDTO = {
    description: string;
    status: TaskStatusDTO;
    priority: TaskPriorityDTO;
-   deadline: string | null;
+   deadline: string;
 };

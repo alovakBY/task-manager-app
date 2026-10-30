@@ -1,0 +1,104 @@
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--gray02);
+  border-left-width: 4px;
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+
+  &:hover {
+    box-shadow: var(--box-shadow);
+  }
+
+  &.overdue {
+    border-left-color: var(--color-danger);
+  }
+
+  &.due-soon {
+    border-left-color: var(--color-warning);
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+}
+
+.counters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  gap: 8px;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: var(--bg-muted);
+  gap: 2px;
+
+  &.alert {
+    .counter-label,
+    .counter-value {
+      color: var(--color-danger);
+    }
+  }
+}
+
+.counter-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.counter-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.total {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.link {
+  color: var(--text-main);
+  text-decoration: none;
+  outline: none;
+
+  // Makes the whole card clickable while keeping a single link in the markup
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: '';
+    border-radius: inherit;
+  }
+}

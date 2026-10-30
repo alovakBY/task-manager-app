@@ -1,0 +1,20 @@
+.root {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+
+  &.warning {
+    color: var(--color-warning);
+    background-color: var(--color-warning-soft);
+  }
+
+  &.danger {
+    color: var(--color-danger);
+    background-color: var(--color-danger-soft);
+  }
+}

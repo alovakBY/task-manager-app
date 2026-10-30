@@ -2,7 +2,7 @@ import type { ListDTO } from '@/features/lists/api/types';
 import type { TaskDTO } from '@/features/tasks/api/types';
 
 export type MockStore = {
-   lists: ListDTO[];
+   lists: Pick<ListDTO, 'id' | 'name'>[];
    tasks: TaskDTO[];
 };
 
@@ -26,7 +26,7 @@ const createTask = (
 });
 
 export const createMockData = (): MockStore => {
-   const lists: ListDTO[] = [
+   const lists: Pick<ListDTO, 'id' | 'name'>[] = [
       {
          id: crypto.randomUUID(),
          name: 'Работа',

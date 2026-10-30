@@ -40,6 +40,12 @@ export const listsTable = {
    },
 };
 
+export const tasksTable = {
+   getTasksByListId: (listId: string) => {
+      return store.tasks.filter((task) => task.listId === listId);
+   },
+};
+
 export const authService = {
    get: () => readStorage<User>(SESSION_STORAGE_KEY),
    set: (user: User) => writeStorage(SESSION_STORAGE_KEY, user),
