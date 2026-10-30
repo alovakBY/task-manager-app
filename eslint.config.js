@@ -10,50 +10,50 @@ import eslintReact from '@eslint-react/eslint-plugin';
 import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default defineConfig(
-  { ignores: ['dist', 'node_modules'] },
-  {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      eslintReact.configs.recommended,
-    ],
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: { jsx: true },
+   { ignores: ['dist', 'node_modules'] },
+   {
+      extends: [
+         js.configs.recommended,
+         ...tseslint.configs.recommended,
+         eslintReact.configs.recommended,
+      ],
+      files: ['**/*.{ts,tsx}'],
+      languageOptions: {
+         ecmaVersion: 'latest',
+         sourceType: 'module',
+         globals: globals.browser,
+         parserOptions: {
+            ecmaFeatures: { jsx: true },
+         },
       },
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-      'simple-import-sort': simpleImportSort,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-      'simple-import-sort/exports': 'error',
-      'react-hooks/exhaustive-deps': 'error',
+      plugins: {
+         'react-hooks': reactHooks,
+         'react-refresh': reactRefresh,
+         'simple-import-sort': simpleImportSort,
+      },
+      rules: {
+         ...reactHooks.configs.recommended.rules,
+         'react-refresh/only-export-components': [
+            'warn',
+            { allowConstantExport: true },
+         ],
+         'simple-import-sort/exports': 'error',
+         'react-hooks/exhaustive-deps': 'error',
 
-      'simple-import-sort/imports': [
-        'error',
-        {
-          groups: [
-            ['^react', '^(?!@/)(^@?\\w)'],
-            ['^@/'],
-            ['^(shared|PlaceOrder)'],
-            ['^\\./', '^\\..?'],
-            ['^.*\\.module\\.scss$'],
-          ],
-        },
-      ],
-    },
-  },
-  ...pluginQuery.configs['flat/recommended'],
-  prettier,
+         'simple-import-sort/imports': [
+            'error',
+            {
+               groups: [
+                  ['^react', '^(?!@/)(^@?\\w)'],
+                  ['^@/'],
+                  ['^(shared|PlaceOrder)'],
+                  ['^\\./', '^\\..?'],
+                  ['^.*\\.module\\.scss$'],
+               ],
+            },
+         ],
+      },
+   },
+   ...pluginQuery.configs['flat/recommended'],
+   prettier,
 );

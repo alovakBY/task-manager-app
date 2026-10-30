@@ -1,3 +1,3 @@
 export const TaskDetailPage = () => {
-  return <div>TaskDetailPage</div>;
+   return <div>TaskDetailPage</div>;
 };

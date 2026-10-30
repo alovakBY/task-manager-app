@@ -1,9 +1,9 @@
 export type SignInDTO = {
-  email: string;
-  password: string;
+   email: string;
+   password: string;
 };
 
 export type User = {
-  name: string;
-  email: string;
+   name: string;
+   email: string;
 };

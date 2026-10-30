@@ -6,15 +6,15 @@ import { Loader } from '@/shared/view/components/Loader/Loader';
 import { PATHS } from './constants';
 
 export const ProtectedRoute = () => {
-  const { isLoading, data } = useAuth();
+   const { isLoading, data } = useAuth();
 
-  if (isLoading) {
-    return <Loader isFullScreen />;
-  }
+   if (isLoading) {
+      return <Loader isFullScreen />;
+   }
 
-  if (!data?.isAuth) {
-    return <Navigate to={`/${PATHS.LOGIN}`} replace />;
-  }
+   if (!data?.isAuth) {
+      return <Navigate to={`/${PATHS.LOGIN}`} replace />;
+   }
 
-  return <Outlet />;
+   return <Outlet />;
 };

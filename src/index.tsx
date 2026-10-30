@@ -6,37 +6,37 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AppRouter } from './routes';
 
 const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      retry: false,
-    },
-  },
+   defaultOptions: {
+      queries: {
+         refetchOnWindowFocus: false,
+         retry: false,
+      },
+   },
 });
 
 import '@/shared/view/styles/index.scss';
 
 async function enableMocking() {
-  if (!import.meta.env.DEV) {
-    return;
-  }
+   if (!import.meta.env.DEV) {
+      return;
+   }
 
-  const { worker } = await import('./mocks/browser');
+   const { worker } = await import('./mocks/browser');
 
-  return worker.start();
+   return worker.start();
 }
 
 const container = document.getElementById('root');
 const rootElement = createRoot(container!);
 
 enableMocking().then(() => {
-  rootElement.render(
-    <StrictMode>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <AppRouter />
-        </QueryClientProvider>
-      </ThemeProvider>
-    </StrictMode>,
-  );
+   rootElement.render(
+      <StrictMode>
+         <ThemeProvider>
+            <QueryClientProvider client={queryClient}>
+               <AppRouter />
+            </QueryClientProvider>
+         </ThemeProvider>
+      </StrictMode>,
+   );
 });
