@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { api } from '@/api/config';
 
-import type { CurrentUser } from './types';
+import type { CurrentUser } from '../model/types';
 
 export const useAuth = () => {
   return useQuery({
@@ -10,7 +10,6 @@ export const useAuth = () => {
     queryFn: async () => {
       try {
         const response = await api.get<CurrentUser>('/auth/me');
-        console.log(response);
 
         return response.data;
       } catch {

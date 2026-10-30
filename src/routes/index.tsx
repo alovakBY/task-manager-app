@@ -1,9 +1,11 @@
 import { lazy, Suspense } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router';
 
+import { Loader } from '@/shared/view/components/Loader/Loader';
+
 import { PATHS } from './constants';
 import { ProtectedRoute } from './ProtectedRoute';
-import { AppLayout } from '../shared/view/Layouts/AppLayout/AppLayout';
+import { AppLayout } from '../shared/view/layouts/AppLayout/AppLayout';
 
 const LoginPage = lazy(() =>
   import('@/pages/Login/LoginPage').then((module) => ({
@@ -28,7 +30,7 @@ const TaskDetailPage = lazy(() =>
 );
 
 const withSuspense = (Component: React.ComponentType) => (
-  <Suspense fallback={<div>Загрузка страницы...</div>}>
+  <Suspense fallback={<Loader isFullScreen />}>
     <Component />
   </Suspense>
 );

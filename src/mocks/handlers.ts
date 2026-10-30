@@ -19,8 +19,8 @@ export const handlers = [
       }
 
       return HttpResponse.json(
-        { message: 'Неверный email или пароль' },
-        { status: 400 },
+        { message: 'Incorrect email or password' },
+        { status: 401 },
       );
     },
   ),

@@ -1,16 +1,18 @@
 import { Navigate, Outlet } from 'react-router';
 
+import { useAuth } from '@/features/auth/api/useAuth';
+import { Loader } from '@/shared/view/components/Loader/Loader';
+
 import { PATHS } from './constants';
 
 export const ProtectedRoute = () => {
-  const isAuthenticated = localStorage.getItem('is_auth') === 'true';
-  const isLoading = false;
+  const { isLoading, data } = useAuth();
 
   if (isLoading) {
-    return <div>Проверка авторизации...</div>;
+    return <Loader isFullScreen />;
   }
 
-  if (!isAuthenticated) {
+  if (!data?.isAuth) {
     return <Navigate to={PATHS.LOGIN} replace />;
   }
 

@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: var(--red);
+  text-align: center;
+  visibility: hidden;
+  height: 20px;
+  margin-bottom: 12px;
+  opacity: 0;
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.button {
+  margin-top: 20px;
+}

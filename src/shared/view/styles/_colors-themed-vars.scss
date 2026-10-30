@@ -2,6 +2,9 @@
 
 @mixin light-theme-variables {
   --bg-main: #fcfcfc;
+  --bg-secondary: #f8fafd;
+
+  // --bg-3: #f5f4f8;
   --bg-surface: var(--white);
   --text-main: var(--black);
   --text-muted: var(--gray);
@@ -14,7 +17,10 @@
 }
 
 @mixin dark-theme-variables {
-  --bg-main: #09090b;
+  --bg-main: #161617;
+  --bg-secondary: #2b273b;
+
+  // --bg-3: #292636;
   --bg-surface: #18181b;
   --text-main: var(--white);
   --text-muted: #a1a1aa;

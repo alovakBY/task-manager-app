@@ -6,7 +6,6 @@ import styles from './Header.module.scss';
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
-  console.log(theme);
 
   return (
     <div className={styles.root}>
