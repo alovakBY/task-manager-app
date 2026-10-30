@@ -13,7 +13,7 @@ export const ProtectedRoute = () => {
   }
 
   if (!data?.isAuth) {
-    return <Navigate to={PATHS.LOGIN} replace />;
+    return <Navigate to={`/${PATHS.LOGIN}`} replace />;
   }
 
   return <Outlet />;

@@ -65,6 +65,10 @@ const routerConfig = createBrowserRouter([
           },
         ],
       },
+      {
+        path: '*',
+        element: <Navigate replace to={`/${PATHS.LISTS}`} />,
+      },
     ],
   },
 ]);
