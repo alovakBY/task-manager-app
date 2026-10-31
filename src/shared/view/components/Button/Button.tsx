@@ -5,7 +5,7 @@ import { Loader } from '@/shared/view/components/Loader/Loader';
 import styles from './Button.module.scss';
 
 type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-   variant?: 'primary' | 'secondary';
+   variant?: 'primary' | 'secondary' | 'danger';
    isLoading?: boolean;
 };
 

@@ -1,0 +1,40 @@
+$z-index-overlay: 100;
+$z-index-content: $z-index-overlay + 10;
+
+.overlay {
+  position: fixed;
+  z-index: $z-index-overlay;
+  inset: 0;
+  background-color: var(--overlay);
+}
+
+.content {
+  color: var(--text-main);
+  position: fixed;
+  z-index: $z-index-content;
+  top: 50%;
+  left: 50%;
+  overflow-y: auto;
+  width: 520px;
+  max-height: calc(100vh - 32px);
+  padding: 24px;
+  box-shadow: var(--box-shadow);
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--gray02);
+  border-radius: 16px;
+  outline: none;
+  background-color: var(--bg-surface);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}

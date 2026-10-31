@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import cn from 'clsx';
 
 import styles from './Loader.module.scss';
@@ -8,10 +7,7 @@ type Props = {
    isFullScreen?: boolean;
 };
 
-export const Loader: FC<Props> = ({
-   size = 'medium',
-   isFullScreen = false,
-}) => {
+export const Loader = ({ size = 'medium', isFullScreen = false }: Props) => {
    const loaderClass = `${styles.spinner} ${styles[size]}`;
 
    return (

@@ -29,6 +29,11 @@
     }
   }
 
+  &.danger {
+    color: var(--white);
+    background-color: var(--color-danger);
+  }
+
   &:hover {
     opacity: 0.9;
   }

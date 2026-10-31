@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import * as ProgressRadix from '@radix-ui/react-progress';
 
 import styles from './Progress.module.scss';
@@ -8,7 +7,7 @@ type Props = {
    label: string;
 };
 
-export const Progress: FC<Props> = ({ value }) => {
+export const Progress = ({ value }: Props) => {
    return (
       <ProgressRadix.Root value={value} className={styles.root}>
          <ProgressRadix.Indicator

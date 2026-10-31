@@ -1,4 +1,4 @@
-import type { FC, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { DesktopIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { DropdownMenu } from '@shared/view/components/DropdownMenu/DropdownMenu';
 import type { Theme } from '@shared/view/providers/ThemeProvider/types';
@@ -45,7 +45,7 @@ const items: { value: Theme; label: ReactNode }[] = [
    },
 ];
 
-export const ThemeSwitcher: FC<Props> = ({ theme, onChangeTheme }) => {
+export const ThemeSwitcher = ({ theme, onChangeTheme }: Props) => {
    return (
       <DropdownMenu
          trigger={<IconButton>{icons[theme]}</IconButton>}

@@ -1,4 +1,4 @@
-import { type FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ThemeProviderContext } from './ThemeContext';
 import type { Theme } from './types';
@@ -9,11 +9,11 @@ type Props = {
    storageKey?: string;
 };
 
-export const ThemeProvider: FC<Props> = ({
+export const ThemeProvider = ({
    children,
    defaultTheme = 'system',
    storageKey = 'task-manager:theme',
-}) => {
+}: Props) => {
    const [themeState, setThemeState] = useState<Theme>(() => {
       return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
    });

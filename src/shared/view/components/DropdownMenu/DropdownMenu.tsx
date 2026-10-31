@@ -1,4 +1,4 @@
-import { type FC, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import * as DropdownMenuRadix from '@radix-ui/react-dropdown-menu';
 import cn from 'clsx';
 
@@ -11,16 +11,11 @@ type Props = {
    onChange: (value: string) => void;
 };
 
-export const DropdownMenu: FC<Props> = ({
-   trigger,
-   value,
-   items,
-   onChange,
-}) => {
+export const DropdownMenu = ({ trigger, value, items, onChange }: Props) => {
    return (
       <DropdownMenuRadix.Root>
          <DropdownMenuRadix.Trigger asChild>
-            <button aria-label="Customise options">{trigger}</button>
+            {trigger}
          </DropdownMenuRadix.Trigger>
 
          <DropdownMenuRadix.Portal>

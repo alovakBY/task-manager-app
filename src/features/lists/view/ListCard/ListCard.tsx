@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import cn from 'clsx';
@@ -14,11 +13,11 @@ import styles from './ListCard.module.scss';
 
 type Props = {
    list: ListDTO;
-   onRename: (id: string) => void;
-   onDelete: (id: string) => void;
+   onRename: (list: ListDTO) => void;
+   onDelete: (list: ListDTO) => void;
 };
 
-export const ListCard: FC<Props> = ({ list, onRename, onDelete }) => {
+export const ListCard = ({ list, onRename, onDelete }: Props) => {
    const { id: listId, name, total, counters, progress, indicator } = list;
 
    const counterItems = [
@@ -46,10 +45,10 @@ export const ListCard: FC<Props> = ({ list, onRename, onDelete }) => {
                </Link>
             </h2>
             <div className={styles.actions}>
-               <IconButton onClick={() => onRename(listId)}>
+               <IconButton onClick={() => onRename(list)}>
                   <Pencil1Icon />
                </IconButton>
-               <IconButton tone="danger" onClick={() => onDelete(listId)}>
+               <IconButton tone="danger" onClick={() => onDelete(list)}>
                   <TrashIcon />
                </IconButton>
             </div>
