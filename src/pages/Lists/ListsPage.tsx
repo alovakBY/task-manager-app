@@ -4,10 +4,12 @@ import cn from 'clsx';
 
 import type { ListDTO } from '@/features/lists/api/types';
 import { useLists } from '@/features/lists/api/useLists';
+import { CreateListDialog } from '@/features/lists/view/CreateListDialog/CreateListDialog';
+import { DeleteListDialog } from '@/features/lists/view/DeleteListDialog/DeleteListDialog';
 import { ListCard } from '@/features/lists/view/ListCard/ListCard';
+import { RenameListDialog } from '@/features/lists/view/RenameListDialog/RenameListDialog';
 import { useDebouncedValue } from '@/shared/utils/useDebouncedValue';
 import { Button } from '@/shared/view/components/Button/Button';
-import { ConfirmDialog } from '@/shared/view/components/ConfirmDialog/ConfirmDialog';
 import { Input } from '@/shared/view/components/Input/Input';
 import { Loader } from '@/shared/view/components/Loader/Loader';
 import { StateMessage } from '@/shared/view/components/StateMessage/StateMessage';
@@ -16,21 +18,17 @@ import styles from './ListPage.module.scss';
 
 export const ListsPage = () => {
    const [search, setSearch] = useState('');
-   const [selectedList, setSelectedList] = useState<ListDTO | null>(null);
+   const [deletedList, setDeletedList] = useState<ListDTO | null>(null);
+   const [renamedList, setRenamedList] = useState<ListDTO | null>(null);
+   const [createDialogOpen, setCreateDialogOpen] = useState(false);
 
    const debouncedSearch = useDebouncedValue(search);
 
    const {
       data: lists = [],
-      isPlaceholderData,
       isPending,
+      isFetching,
    } = useLists(debouncedSearch);
-
-   const handleOpenChange = (open: boolean) => {
-      if (!open) {
-         setSelectedList(null);
-      }
-   };
 
    const renderContent = () => {
       if (isPending) {
@@ -47,7 +45,10 @@ export const ListsPage = () => {
                title="No lists yet"
                description="Create your first list to start adding tasks"
                action={
-                  <Button className={styles.addButton} onClick={() => {}}>
+                  <Button
+                     className={styles.addButton}
+                     onClick={() => setCreateDialogOpen(true)}
+                  >
                      <PlusIcon /> New list
                   </Button>
                }
@@ -56,16 +57,14 @@ export const ListsPage = () => {
       }
 
       return (
-         <div
-            className={cn(styles.lists, { [styles.stale]: isPlaceholderData })}
-         >
+         <div className={cn(styles.lists, { [styles.stale]: isFetching })}>
             {lists.map((list) => {
                return (
                   <ListCard
                      key={list.id}
                      list={list}
-                     onRename={setSelectedList}
-                     onDelete={setSelectedList}
+                     onRename={() => setRenamedList(list)}
+                     onDelete={() => setDeletedList(list)}
                   />
                );
             })}
@@ -86,24 +85,27 @@ export const ListsPage = () => {
                      onChange={(event) => setSearch(event.target.value)}
                   />
                </div>
-               <Button className={styles.addButton} onClick={() => {}}>
+               <Button
+                  className={styles.addButton}
+                  onClick={() => setCreateDialogOpen(true)}
+               >
                   <PlusIcon /> New list
                </Button>
             </div>
          </header>
          {renderContent()}
-         <ConfirmDialog
-            open={Boolean(selectedList)}
-            onOpenChange={handleOpenChange}
-            onConfirm={() => {}}
-            title="Delete list?"
-            message={
-               <>
-                  List <strong>"{selectedList?.name}"</strong> and all its tasks
-                  ({selectedList?.total}) will be deleted. This cannot be
-                  undone.
-               </>
-            }
+
+         <DeleteListDialog
+            onClose={() => setDeletedList(null)}
+            deletedList={deletedList}
+         />
+         <CreateListDialog
+            onClose={() => setCreateDialogOpen(false)}
+            open={createDialogOpen}
+         />
+         <RenameListDialog
+            onClose={() => setRenamedList(null)}
+            renamedList={renamedList}
          />
       </div>
    );

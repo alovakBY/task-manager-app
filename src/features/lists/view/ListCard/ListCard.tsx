@@ -39,11 +39,22 @@ export const ListCard = ({ list, onRename, onDelete }: Props) => {
          })}
       >
          <div className={styles.header}>
-            <h2 className={styles.name}>
-               <Link to={ROUTES.list(listId)} className={styles.link}>
-                  {name}
-               </Link>
-            </h2>
+            <div className={styles.headerLeft}>
+               <h2 className={styles.name}>
+                  <Link to={ROUTES.list(listId)} className={styles.link}>
+                     {name}
+                  </Link>
+               </h2>
+               <div className={styles.indicator}>
+                  {indicator === 'overdue' && (
+                     <Badge tone="danger">Has overdue tasks</Badge>
+                  )}
+                  {indicator === 'urgent' && (
+                     <Badge tone="warning">Deadline within 48h</Badge>
+                  )}
+               </div>
+            </div>
+
             <div className={styles.actions}>
                <IconButton onClick={() => onRename(list)}>
                   <Pencil1Icon />
@@ -52,15 +63,6 @@ export const ListCard = ({ list, onRename, onDelete }: Props) => {
                   <TrashIcon />
                </IconButton>
             </div>
-         </div>
-
-         <div className={styles.indicator}>
-            {indicator === 'overdue' && (
-               <Badge tone="danger">Has overdue tasks</Badge>
-            )}
-            {indicator === 'urgent' && (
-               <Badge tone="warning">Deadline within 48h</Badge>
-            )}
          </div>
          <div className={styles.counters}>
             {counterItems.map((item) => (

@@ -15,6 +15,7 @@
   --color-warning-soft: #fff0ce;
   --color-danger-soft: #fee2e2;
   --box-shadow: 0 4px 16px rgb(0 0 0 / 8%);
+  --overlay: rgb(0 0 0 / 40%);
   color-scheme: light;
 }
 
@@ -30,9 +31,10 @@
   --gray02: #27272a;
   --color-main: #e9e9e9;
   --gray01: #8a8a8b;
-  --color-danger-soft: #ef44442e;
-  --color-warning-soft: #eab3082e;
+  --color-danger-soft: rgb(239 68 68 / 18%);
+  --color-warning-soft: rgb(234 179 8 / 18%);
   --box-shadow: 0 4px 16px rgb(255 255 255 / 8%);
+  --overlay: rgb(0 0 0 / 65.1%);
   color-scheme: dark;
 }
 

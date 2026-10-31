@@ -12,7 +12,7 @@ type Props = {
    message: ReactNode;
    confirmLabel?: string;
    isPending?: boolean;
-   error?: string | null;
+   error?: string;
    onConfirm: () => void;
 };
 
@@ -34,9 +34,9 @@ export const ConfirmDialog = ({
          description={message}
       >
          {error && (
-            <p role="alert" className={styles.error}>
+            <div role="alert" className={styles.error}>
                {error}
-            </p>
+            </div>
          )}
          <div className={styles.actions}>
             <Button

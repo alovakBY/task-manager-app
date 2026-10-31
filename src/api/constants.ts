@@ -7,10 +7,9 @@ export const ENDPOINTS = {
    AUTH_LOGOUT: '/auth/logout',
    //LISTS
    LISTS: '/lists',
+   LIST: (id: string) => `/lists/${id}`,
 } as const;
 
-type Endpoints = (typeof ENDPOINTS)[keyof typeof ENDPOINTS];
-
-export const getEndpointWithBaseUrl = (endpoint: Endpoints) => {
+export const getEndpointWithBaseUrl = (endpoint: string) => {
    return `${BASE_URL}${endpoint}`;
 };
