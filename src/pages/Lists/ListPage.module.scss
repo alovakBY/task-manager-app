@@ -1,5 +1,43 @@
 .root {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.toolbar {
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.search {
+  flex-grow: 1;
+  max-width: 240px;
+}
+
+.lists {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 16px;
+
+  &.stale {
+    opacity: 0.6;
+  }
+}
+
+.add-button {
+  max-width: 120px;
 }

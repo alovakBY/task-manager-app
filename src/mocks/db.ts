@@ -35,8 +35,8 @@ const writeStorage = (key: StorageKeys, value: unknown | null) => {
 const store = readStorage<MockStore>(DB_STORAGE_KEY) ?? createMockData();
 
 export const listsTable = {
-   getLists: () => {
-      return store.lists;
+   getLists: (search: string) => {
+      return store.lists.filter((list) => list.name.includes(search.trim()));
    },
 };
 

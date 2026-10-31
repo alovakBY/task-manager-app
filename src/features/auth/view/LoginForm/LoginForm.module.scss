@@ -1,6 +1,7 @@
-.root {
+.form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 .error {
@@ -18,5 +19,5 @@
 }
 
 .button {
-  margin-top: 20px;
+  margin-top: 28px;
 }

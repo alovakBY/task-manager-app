@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 
 import { ENDPOINTS, getEndpointWithBaseUrl } from '@/api/constants';
 import type { ListDTO } from '@/features/lists/api/types';
@@ -10,8 +10,12 @@ export const listsHandlers = [
    // list
    http.get<never, never, ListDTO[]>(
       getEndpointWithBaseUrl(ENDPOINTS.LISTS),
-      () => {
-         const lists = listsTable.getLists().map((list) => {
+      async ({ request }) => {
+         const search = new URL(request.url).searchParams.get('search') ?? '';
+
+         await delay(100);
+
+         const lists = listsTable.getLists(search).map((list) => {
             const tasks = tasksTable.getTasksByListId(list.id);
 
             return { ...list, ...getListStats(tasks) };

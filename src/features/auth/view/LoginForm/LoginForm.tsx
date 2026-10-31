@@ -69,32 +69,35 @@ export const LoginForm = () => {
          >
             {apiError?.response?.data?.message || 'Something went wrong'}
          </div>
-         <Input
-            label="Email"
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-            disabled={isPending}
-         />
-         <Input
-            label="Password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-            disabled={isPending}
-         />
-
-         <Button
-            onClick={handleSubmit}
-            className={styles.button}
-            isLoading={isPending}
-         >
-            Login
-         </Button>
+         <div className={styles.form}>
+            <Input
+               id="email"
+               label="Email"
+               type="email"
+               placeholder="Email"
+               value={email}
+               onChange={(e) => setEmail(e.target.value)}
+               error={errors.email}
+               disabled={isPending}
+            />
+            <Input
+               id="password"
+               label="Password"
+               type="password"
+               placeholder="Password"
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+               error={errors.password}
+               disabled={isPending}
+            />
+            <Button
+               onClick={handleSubmit}
+               className={styles.button}
+               isLoading={isPending}
+            >
+               Login
+            </Button>
+         </div>
       </div>
    );
 };
