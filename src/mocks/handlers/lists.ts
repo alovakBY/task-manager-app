@@ -4,7 +4,8 @@ import { ENDPOINTS, getEndpointWithBaseUrl } from '@/api/constants';
 import type { ListDTO } from '@/features/lists/api/types';
 
 import { listsTable, tasksTable } from '../db';
-import { getListStats, getNotFoundResponse } from '../utils';
+import { getListStats } from '../utils/getListStats';
+import { getNotFoundResponse } from '../utils/getNotFoundResponse';
 
 export const listsHandlers = [
    // get lists

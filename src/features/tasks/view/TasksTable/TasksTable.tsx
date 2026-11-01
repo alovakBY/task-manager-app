@@ -5,9 +5,12 @@ import cn from 'clsx';
 import { PriorityBadge } from '@/features/lists/view/PriorityBadge/PriorityBadge';
 import { ROUTES } from '@/routes/constants';
 import { Button } from '@/shared/view/components/Button/Button';
+import { Loader } from '@/shared/view/components/Loader/Loader';
 import { StateMessage } from '@/shared/view/components/StateMessage/StateMessage';
 
+import type { TaskStatusDTO } from '../../api/types';
 import { useTasks } from '../../api/useTasks';
+import { STATUS_LABELS } from '../../model/constants';
 import { DeadlineLabel } from '../DeadlineLabel/DeadlineLabel';
 import { StatusSelect } from '../StatusSelect/StatusSelect';
 
@@ -15,11 +18,11 @@ import styles from './TasksTable.module.scss';
 
 type Props = {
    listId: string;
+   statusFilter: TaskStatusDTO | null;
 };
 
-export const TasksTable = ({ listId }: Props) => {
-   const { data: tasks = [] } = useTasks(listId);
-
+export const TasksTable = ({ listId, statusFilter }: Props) => {
+   const { data: tasks = [], isPending } = useTasks(listId);
    const renderContent = () => {
       if (tasks.length === 0) {
          return (
@@ -78,6 +81,29 @@ export const TasksTable = ({ listId }: Props) => {
          </table>
       );
    };
+
+   if (isPending) {
+      return <Loader />;
+   }
+
+   if (tasks.length === 0) {
+      return statusFilter ? (
+         <StateMessage
+            title={`No “${STATUS_LABELS[statusFilter]}” tasks`}
+            description="Try another status filter"
+         />
+      ) : (
+         <StateMessage
+            title="No tasks yet"
+            description="Add the first task to this list"
+            action={
+               <Button onClick={() => {}}>
+                  <PlusIcon /> Add task
+               </Button>
+            }
+         />
+      );
+   }
 
    return <div className={styles.root}>{renderContent()}</div>;
 };

@@ -19,3 +19,18 @@
 .add-button {
   max-width: 120px;
 }
+
+.back-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  border-radius: 4px;
+  gap: 6px;
+
+  &:hover {
+    color: var(--text-main);
+  }
+}

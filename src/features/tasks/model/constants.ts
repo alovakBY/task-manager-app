@@ -8,7 +8,7 @@ export const STATUS_LABELS: Record<TaskStatusDTO, TaskStatus> = {
    new: 'New',
    in_progress: 'In progress',
    done: 'Done',
-};
+} as const;
 
 export const PRIORITY_LABELS: Record<TaskPriorityDTO, TaskPriority> = {
    low: 'Low',
@@ -16,7 +16,9 @@ export const PRIORITY_LABELS: Record<TaskPriorityDTO, TaskPriority> = {
    high: 'High',
 };
 
-export const STATUS_OPTIONS = Object.keys(STATUS_LABELS).map((status) => ({
+export const STATUS_OPTIONS = (
+   Object.keys(STATUS_LABELS) as TaskStatusDTO[]
+).map((status) => ({
    value: status,
    label: STATUS_LABELS[status],
 }));
