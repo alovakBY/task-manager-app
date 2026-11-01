@@ -1,9 +1,8 @@
 {
    "name": "task-manager-app",
    "private": true,
-   "version": "0.0.0",
+   "version": "1.0.0",
    "type": "module",
-   "homepage": "https://alovakby.github.io/task-manager-app/",
    "scripts": {
       "dev": "vite",
       "build": "npm run typecheck && vite build",

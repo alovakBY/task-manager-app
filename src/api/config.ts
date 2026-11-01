@@ -3,7 +3,7 @@ import axios from 'axios';
 import { authService } from '@/mocks/db';
 import { ROUTES } from '@/routes/constants';
 
-export const BASE_URL = '/api'; // Чистый оригинальный урл
+export const BASE_URL = '/api';
 
 export const api = axios.create({
    baseURL: BASE_URL,

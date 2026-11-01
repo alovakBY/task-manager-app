@@ -67,11 +67,11 @@ const routerConfig = createBrowserRouter([
          },
          {
             path: '*',
-            element: <Navigate replace to={PATHS.LISTS} />, // Наш чистый редирект без слэша
+            element: <Navigate replace to={PATHS.LISTS} />,
          },
       ],
    },
-]); // <-- Больше никаких вторых аргументов и basename!
+]);
 
 export const AppRouter = () => {
    return <RouterProvider router={routerConfig} />;
