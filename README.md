@@ -14,11 +14,17 @@ React · TypeScript · Vite · React Router · TanStack Query · axios · MSW ·
 npm install
 npm run dev # http://localhost:5173
 
-| `npm run dev` - dev-сервер
-| `npm run build` / `npm run preview` - проверка типов + продакшен-сборка / локальный просмотр сборки | |
-| `npm run test:storybook` - play-функции всех историй |
-| `npm run storybook` - Storybook на http://localhost:6006 |
-| `npm run lint` / `npm run lint:css` / `npm run typecheck` - ESLint / Stylelint / `tsc -b` |
+`npm run dev` - dev-сервер
+
+`npm run build` / `npm run preview` - проверка типов + продакшен-сборка / локальный просмотр сборки
+
+`npm run test:storybook` - play-функции всех историй
+
+`npm run storybook` - Storybook на http://localhost:6006
+
+`npm run lint`
+/ `npm run lint:css`
+/ `npm run typecheck` - ESLint / Stylelint / `tsc --noEmit -p tsconfig.app.json`
 
 Перед первым запуском Storybook-тестов скачайте браузер для Playwright:
 
@@ -53,13 +59,12 @@ npx playwright install chromium --only-shell
 
 Чистые функции без React, покрыты юнит-тестами:
 
-- `features/tasks/model/sortTasks.ts` — сортировка:
+- `mocks/utils/sortTasks.ts` — сортировка:
    1. незавершённые просроченные — выше всех;
    2. чем ближе дедлайн, тем выше (задачи без дедлайна — после задач с дедлайном);
-   3. приоритет (high → low) разрешает ничью при одинаковом дедлайне;
-   4. `done` — внизу.
-- `features/tasks/model/deadline.ts` — «просрочена» (незавершённая с прошедшим дедлайном) и «скоро дедлайн» (в ближайшие 48 часов).
-- `features/lists/model/listStats.ts` — счётчики карточки, прогресс и цветовой индикатор. Каждая задача попадает ровно в одну корзину, поэтому сумма счётчиков равна числу задач: незавершённая просроченная задача считается как `overdue`, а не как `new` / `in progress`. Прогресс — доля `done`. Индикатор: красный — есть просроченные, жёлтый — есть дедлайн в ближайшие 48 часов.
+   3. `done` — внизу.
+- `mocks/utils/getTaskDeadlineStatus.ts` — «просрочена» (незавершённая с прошедшим дедлайном) и «скоро дедлайн» (в ближайшие 48 часов).
+- `mocks/utils/getListStats.ts` — счётчики карточки, прогресс и цветовой индикатор. Каждая задача попадает ровно в одну корзину, поэтому сумма счётчиков равна числу задач: незавершённая просроченная задача считается как `overdue`, а не как `new` / `in_progress`. Прогресс — доля `done`. Индикатор: красный — есть просроченные, жёлтый — есть дедлайн в ближайшие 48 часов.
 
 ## Тесты
 
@@ -77,6 +82,6 @@ src/
     */view      презентационные компоненты (+ *.stories.tsx)
   pages/        страницы — связывают хуки и компоненты
   routes/       роутер, защищённые маршруты, пути
-  mocks/        MSW: хендлеры, «БД», сид
-  shared/       UI-кит (Button, Input, Select, Modal, …), тема, утилиты
+  mocks/        MSW: хендлеры, «БД»
+  shared/       UI-кит (Button, Input, Dialog, …), тема, утилиты
 ```

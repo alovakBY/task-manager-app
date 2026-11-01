@@ -11,8 +11,6 @@ export const useUpdateTask = () => {
    return useMutation({
       mutationKey: ['tasks', 'update'],
       mutationFn: async ({ id, data }: UpdateTaskInput) => {
-         console.log(id, data);
-
          const response = await api.patch(PATH_BUILDERS.TASK(id), data);
 
          return response.data;
