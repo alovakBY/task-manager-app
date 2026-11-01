@@ -10,7 +10,8 @@ export const ENDPOINTS = {
    LIST: '/lists/:id',
    TASKS_BY_LIST_ID: '/lists/:id/tasks',
    // TASKS
-   TASKS: '/tasks/:id',
+   TASK: '/tasks/:id',
+   // TASKS: '/tasks/:id',
 } as const;
 
 export const PATH_BUILDERS = {

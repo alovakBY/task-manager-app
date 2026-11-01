@@ -2,6 +2,7 @@ import { useEffect, useEffectEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cn from 'clsx';
 
+import { ROUTES } from '@/routes/constants';
 import { Button } from '@/shared/view/components/Button/Button';
 import { Input } from '@/shared/view/components/Input/Input';
 
@@ -39,7 +40,7 @@ export const LoginForm = () => {
 
       if (validationResult.success) {
          mutate(validationResult.data, {
-            onSuccess: () => navigate('/lists'),
+            onSuccess: () => navigate(ROUTES.lists),
          });
       } else {
          const formattedErrors =

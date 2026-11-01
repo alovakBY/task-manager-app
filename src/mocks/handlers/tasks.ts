@@ -8,9 +8,24 @@ import { listsTable, tasksTable } from '../db';
 import { getNotFoundResponse } from '../utils/getNotFoundResponse';
 
 export const tasksHandlers = [
+   // get task
+   http.get<Pick<TaskDTO, 'id'>>(
+      getEndpointWithBaseUrl(ENDPOINTS.TASK),
+      async ({ params }) => {
+         await delay(100);
+
+         const { id } = params;
+
+         const task = tasksTable.getTask(id);
+
+         return task
+            ? HttpResponse.json(task, { status: 200 })
+            : getNotFoundResponse();
+      },
+   ),
    // delete task
    http.delete<never, Pick<TaskDTO, 'id'>>(
-      getEndpointWithBaseUrl(ENDPOINTS.TASKS),
+      getEndpointWithBaseUrl(ENDPOINTS.TASK),
       async ({ params }) => {
          await delay(100);
 
@@ -42,7 +57,7 @@ export const tasksHandlers = [
    ),
    // update task
    http.patch<Pick<TaskDTO, 'id'>, Partial<TaskDataInput>>(
-      getEndpointWithBaseUrl(ENDPOINTS.TASKS),
+      getEndpointWithBaseUrl(ENDPOINTS.TASK),
       async ({ params, request }) => {
          await delay();
 

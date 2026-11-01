@@ -121,7 +121,11 @@ export const tasksTable = {
       return sortTasks(tasks, now);
    },
    getTask: (taskId: string) => {
-      return store.tasks.find((task) => task.id === taskId);
+      const task = store.tasks.find((task) => task.id === taskId);
+
+      return task
+         ? { ...task, deadlineStatus: getTaskDeadlineStatus(task) }
+         : undefined;
    },
    deleteTask: (taskId: string) => {
       if (!tasksTable.getTask(taskId)) {
@@ -159,7 +163,7 @@ export const tasksTable = {
          tasks: store.tasks.map((item) => (item.id === id ? updated : item)),
       });
 
-      return { ...updated, deadlineStatus: getTaskDeadlineStatus(updated) };
+      return { ...task, deadlineStatus: getTaskDeadlineStatus(task) };
    },
 };
 

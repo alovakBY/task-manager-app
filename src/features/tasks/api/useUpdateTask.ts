@@ -17,9 +17,12 @@ export const useUpdateTask = () => {
 
          return response.data;
       },
-      onSuccess: () => {
+      onSuccess: (_, variables) => {
          queryClient.invalidateQueries({
             queryKey: [ENDPOINTS.TASKS_BY_LIST_ID],
+         });
+         queryClient.invalidateQueries({
+            queryKey: [ENDPOINTS.TASK, 'detail', variables.id],
          });
       },
    });

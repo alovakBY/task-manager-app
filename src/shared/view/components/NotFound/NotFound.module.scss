@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 16px;
+}
+
+.not-found {
+  font-size: 32px;
+  text-transform: uppercase;
+}
+
+.button {
+  width: 120px;
+}

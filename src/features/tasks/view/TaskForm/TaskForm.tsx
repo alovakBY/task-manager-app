@@ -10,6 +10,7 @@ import {
    type TaskFormData,
    taskFormSchema,
 } from '../../model/taskFormSchema';
+import { toDateTimeLocalValue } from '../../model/toDateTimeLocalValue';
 import { PrioritySelect } from '../PrioritySelect/PrioritySelect';
 import { StatusSelect } from '../StatusSelect/StatusSelect';
 
@@ -102,7 +103,7 @@ export const TaskForm = ({
          <Input
             label="Deadline"
             type="datetime-local"
-            value={values.deadline}
+            value={toDateTimeLocalValue(values.deadline)}
             onChange={(e) => setField('deadline', e.target.value)}
             error={errors.deadline}
             disabled={isPending}

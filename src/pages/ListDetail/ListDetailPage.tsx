@@ -13,6 +13,7 @@ import { UpdateTaskDialog } from '@/features/tasks/view/UpdateTaskDialog/UpdateT
 import { ROUTES } from '@/routes/constants';
 import { Button } from '@/shared/view/components/Button/Button';
 import { Loader } from '@/shared/view/components/Loader/Loader';
+import { NotFound } from '@/shared/view/components/NotFound/NotFound';
 
 import styles from './ListDetail.module.scss';
 
@@ -33,6 +34,10 @@ export const ListDetailPage = () => {
 
    if (isPending) {
       return <Loader isFullScreen />;
+   }
+
+   if (!list) {
+      return <NotFound title="Lists" />;
    }
 
    const setStatusFilter = (status: TaskStatusDTO | null) => {

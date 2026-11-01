@@ -10,7 +10,7 @@ export const useAddTask = (listId: string) => {
    const queryClient = useQueryClient();
 
    return useMutation<TaskDTO, AxiosError<{ message: string }>, TaskDataInput>({
-      mutationKey: [ENDPOINTS.TASKS, 'add'],
+      mutationKey: [ENDPOINTS.TASK, 'add'],
       mutationFn: async (data) => {
          const response = await api.post(
             PATH_BUILDERS.TASKS_BY_LIST_ID(listId),

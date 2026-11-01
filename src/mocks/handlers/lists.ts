@@ -24,7 +24,7 @@ export const listsHandlers = [
    }),
    // get list
    http.get<Pick<ListDTO, 'id'>>(
-      getEndpointWithBaseUrl(`${ENDPOINTS.LISTS}/:id`),
+      getEndpointWithBaseUrl(ENDPOINTS.LIST),
       async ({ params }) => {
          await delay(100);
 
