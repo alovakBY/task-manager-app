@@ -32,7 +32,7 @@ export const ListsPage = () => {
 
    const renderContent = () => {
       if (isPending) {
-         return <Loader />;
+         return <Loader isFullScreen />;
       }
       if (lists.length === 0) {
          return debouncedSearch ? (

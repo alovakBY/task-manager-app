@@ -1,5 +1,6 @@
-export type TaskStatusDTO = 'new' | 'in_progress' | 'done' | 'overdue';
+export type TaskStatusDTO = 'new' | 'in_progress' | 'done';
 export type TaskPriorityDTO = 'low' | 'medium' | 'high';
+export type TaskDeadlineStatusDTO = 'overdue' | 'urgent' | null;
 
 export type TaskDTO = {
    id: string;
@@ -8,5 +9,6 @@ export type TaskDTO = {
    description: string;
    status: TaskStatusDTO;
    priority: TaskPriorityDTO;
-   deadline: string;
+   deadlineStatus: TaskDeadlineStatusDTO;
+   deadline?: string;
 };

@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
 import { api } from '@/api/config';
-import { ENDPOINTS } from '@/api/constants';
+import { ENDPOINTS, PATH_BUILDERS } from '@/api/constants';
 
 import type { ListDTO } from './types';
 
@@ -16,7 +16,7 @@ export const useDeleteList = () => {
    >({
       mutationKey: [ENDPOINTS.LISTS, 'delete'],
       mutationFn: async (data) => {
-         const response = await api.delete(ENDPOINTS.LIST(data.id));
+         const response = await api.delete(PATH_BUILDERS.LIST(data.id));
 
          return response.data;
       },

@@ -1,7 +1,9 @@
 import type { User } from '@/features/auth/model/types';
 import type { ListDTO } from '@/features/lists/api/types';
+import type { TaskDTO } from '@/features/tasks/api/types';
 
 import { createMockData, type MockStore } from './mockData';
+import { getTaskDeadlineStatus } from './utils';
 
 const DB_STORAGE_KEY = 'task-manager:mock-db';
 const SESSION_STORAGE_KEY = 'task-manager:mock-session';
@@ -94,8 +96,13 @@ export const listsTable = {
 };
 
 export const tasksTable = {
-   getTasksByListId: (listId: string) => {
-      return store.tasks.filter((task) => task.listId === listId);
+   getTasksByListId: (listId: string): TaskDTO[] => {
+      const tasks = store.tasks.map((task) => ({
+         ...task,
+         deadlineStatus: getTaskDeadlineStatus(task),
+      }));
+
+      return tasks.filter((task) => task.listId === listId);
    },
 };
 

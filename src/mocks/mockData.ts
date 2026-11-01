@@ -3,7 +3,7 @@ import type { TaskDTO } from '@/features/tasks/api/types';
 
 export type MockStore = {
    lists: Pick<ListDTO, 'id' | 'name'>[];
-   tasks: TaskDTO[];
+   tasks: Omit<TaskDTO, 'deadlineStatus'>[];
 };
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -15,7 +15,7 @@ const createTask = (
    fields: Pick<TaskDTO, 'title' | 'description' | 'status' | 'priority'> & {
       deadlineInHours: number;
    },
-): TaskDTO => ({
+): Omit<TaskDTO, 'deadlineStatus'> => ({
    id: crypto.randomUUID(),
    listId,
    title: fields.title,
@@ -36,7 +36,7 @@ export const createMockData = (): MockStore => {
 
    const [work, home] = lists;
 
-   const tasks: TaskDTO[] = [
+   const tasks: Omit<TaskDTO, 'deadlineStatus'>[] = [
       createTask(work.id, {
          title: 'Исправить баг с куками',
          description: 'Перевести авторизацию на HttpOnly сессии',

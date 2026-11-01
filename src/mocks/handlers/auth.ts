@@ -7,7 +7,7 @@ import { authService } from '../db';
 
 export const authHandlers = [
    // login
-   http.post<never, SignInDTO, User | { message: string }>(
+   http.post<never, SignInDTO>(
       getEndpointWithBaseUrl(ENDPOINTS.AUTH_LOGIN),
       async ({ request }) => {
          const { email, password } = await request.json();

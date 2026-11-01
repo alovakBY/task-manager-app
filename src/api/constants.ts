@@ -7,7 +7,13 @@ export const ENDPOINTS = {
    AUTH_LOGOUT: '/auth/logout',
    //LISTS
    LISTS: '/lists',
+   LIST: '/lists/:id',
+   TASKS_BY_LIST_ID: '/lists/:id/tasks',
+} as const;
+
+export const PATH_BUILDERS = {
    LIST: (id: string) => `/lists/${id}`,
+   TASKS_BY_LIST_ID: (id: string) => `/lists/${id}/tasks`,
 } as const;
 
 export const getEndpointWithBaseUrl = (endpoint: string) => {

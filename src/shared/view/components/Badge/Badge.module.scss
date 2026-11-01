@@ -17,4 +17,9 @@
     color: var(--color-danger);
     background-color: var(--color-danger-soft);
   }
+
+  &.neutral {
+    color: var(--text-muted);
+    background-color: var(--gray02);
+  }
 }

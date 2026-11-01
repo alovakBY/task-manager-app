@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { AxiosError } from 'axios';
 
 import { api } from '@/api/config';
-import { ENDPOINTS } from '@/api/constants';
+import { ENDPOINTS, PATH_BUILDERS } from '@/api/constants';
 
 import type { ListDTO } from './types';
 
@@ -15,8 +15,8 @@ export const useRenameList = () => {
       Pick<ListDTO, 'id' | 'name'>
    >({
       mutationKey: [ENDPOINTS.LISTS, 'rename'],
-      mutationFn: async (data) => {
-         const response = await api.patch(ENDPOINTS.LIST(data.id), data);
+      mutationFn: async ({ id, name }) => {
+         const response = await api.patch(PATH_BUILDERS.LIST(id), { name });
          return response.data;
       },
       onSuccess: () => {
