@@ -17,13 +17,13 @@ const queryClient = new QueryClient({
 import '@/shared/view/styles/index.scss';
 
 async function enableMocking() {
-   if (!import.meta.env.DEV) {
-      return;
-   }
-
    const { worker } = await import('./mocks/browser');
 
-   return worker.start();
+   return worker.start({
+      serviceWorker: {
+         url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+      },
+   });
 }
 
 const container = document.getElementById('root');

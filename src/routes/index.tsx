@@ -74,7 +74,7 @@ const routerConfig = createBrowserRouter(
       },
    ],
    {
-      basename: '/task-manager-app',
+      basename: import.meta.env.DEV ? '' : '/task-manager-app',
    },
 );
 
