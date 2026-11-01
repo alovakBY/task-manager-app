@@ -5,11 +5,10 @@
 }
 
 .label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-main);
-  display: inline-block;
-  margin-bottom: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: inline-flex;
+  margin-bottom: 8px;
 }
 
 .input {

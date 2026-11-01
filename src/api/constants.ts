@@ -9,11 +9,14 @@ export const ENDPOINTS = {
    LISTS: '/lists',
    LIST: '/lists/:id',
    TASKS_BY_LIST_ID: '/lists/:id/tasks',
+   // TASKS
+   TASKS: '/tasks/:id',
 } as const;
 
 export const PATH_BUILDERS = {
    LIST: (id: string) => `/lists/${id}`,
    TASKS_BY_LIST_ID: (id: string) => `/lists/${id}/tasks`,
+   TASK: (id: string) => `/tasks/${id}`,
 } as const;
 
 export const getEndpointWithBaseUrl = (endpoint: string) => {

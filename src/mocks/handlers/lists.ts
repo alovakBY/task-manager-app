@@ -4,6 +4,7 @@ import { ENDPOINTS, getEndpointWithBaseUrl } from '@/api/constants';
 import type { ListDTO } from '@/features/lists/api/types';
 
 import { listsTable, tasksTable } from '../db';
+import { taskStatusSchema } from '../schemas';
 import { getListStats } from '../utils/getListStats';
 import { getNotFoundResponse } from '../utils/getNotFoundResponse';
 
@@ -79,7 +80,7 @@ export const listsHandlers = [
          if (list) {
             const tasks = tasksTable.getTasksByListId(list.id);
 
-            return new HttpResponse(
+            return HttpResponse.json(
                { ...list, ...getListStats(tasks) },
                { status: 204 },
             );
@@ -91,10 +92,20 @@ export const listsHandlers = [
    // get tasks by listId
    http.get<Pick<ListDTO, 'id'>>(
       getEndpointWithBaseUrl(`${ENDPOINTS.TASKS_BY_LIST_ID}`),
-      async ({ params }) => {
+      async ({ params, request }) => {
          await delay(100);
 
          const { id } = params;
+
+         const statusParam = new URL(request.url).searchParams.get('status');
+         const status = taskStatusSchema.safeParse(statusParam);
+
+         if (statusParam !== null && !status.success) {
+            return HttpResponse.json(
+               { message: `Unknown status "${statusParam}"` },
+               { status: 400 },
+            );
+         }
 
          const list = listsTable.getList(id);
 
@@ -102,7 +113,7 @@ export const listsHandlers = [
             return getNotFoundResponse();
          }
 
-         const tasks = tasksTable.getTasksByListId(list.id);
+         const tasks = tasksTable.getTasksByListId(list.id, status.data);
 
          return HttpResponse.json(tasks, { status: 200 });
       },

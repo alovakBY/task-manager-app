@@ -1,13 +1,7 @@
-import type { TaskStatusDTO } from '../api/types';
+import { TASK_STATUSES_DTO, type TaskStatusDTO } from '../api/types';
 
 export type OpenDialogType = 'rename' | 'create' | 'delete' | null;
 
 export const isTaskStatus = (value: unknown): value is TaskStatusDTO => {
-   const TASK_STATUSES: TaskStatusDTO[] = [
-      'new',
-      'in_progress',
-      'done',
-   ] as const;
-
-   return TASK_STATUSES.includes(value as TaskStatusDTO);
+   return TASK_STATUSES_DTO.includes(value as TaskStatusDTO);
 };

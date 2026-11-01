@@ -16,7 +16,7 @@ export const DeleteListDialog = ({ deletedList, onClose }: Props) => {
    }
 
    const handleSubmit = () => {
-      mutate({ id: deletedList.id }, { onSuccess: onClose });
+      mutate(deletedList.id, { onSuccess: onClose });
    };
 
    return (

@@ -1,4 +1,9 @@
-import type { TaskPriorityDTO, TaskStatusDTO } from '../api/types';
+import {
+   TASK_PRIORITY_DTO,
+   TASK_STATUSES_DTO,
+   type TaskPriorityDTO,
+   type TaskStatusDTO,
+} from '../api/types';
 
 type TaskStatus = 'New' | 'In progress' | 'Done' | 'Overdue';
 
@@ -16,9 +21,12 @@ export const PRIORITY_LABELS: Record<TaskPriorityDTO, TaskPriority> = {
    high: 'High',
 };
 
-export const STATUS_OPTIONS = (
-   Object.keys(STATUS_LABELS) as TaskStatusDTO[]
-).map((status) => ({
+export const STATUS_OPTIONS = TASK_STATUSES_DTO.map((status) => ({
    value: status,
    label: STATUS_LABELS[status],
+}));
+
+export const PRIORITY_OPTIONS = TASK_PRIORITY_DTO.map((priority) => ({
+   value: priority,
+   label: PRIORITY_LABELS[priority],
 }));

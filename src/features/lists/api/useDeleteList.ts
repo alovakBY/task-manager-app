@@ -9,14 +9,10 @@ import type { ListDTO } from './types';
 export const useDeleteList = () => {
    const queryClient = useQueryClient();
 
-   return useMutation<
-      ListDTO,
-      AxiosError<{ message: string }>,
-      Pick<ListDTO, 'id'>
-   >({
+   return useMutation<ListDTO, AxiosError<{ message: string }>, string>({
       mutationKey: [ENDPOINTS.LISTS, 'delete'],
-      mutationFn: async (data) => {
-         const response = await api.delete(PATH_BUILDERS.LIST(data.id));
+      mutationFn: async (id) => {
+         const response = await api.delete(PATH_BUILDERS.LIST(id));
 
          return response.data;
       },

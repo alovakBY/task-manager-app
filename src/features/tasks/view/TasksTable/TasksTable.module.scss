@@ -20,6 +20,10 @@
     background-color: var(--bg-main);
   }
 
+  thead th:last-child {
+    text-align: right;
+  }
+
   tbody tr:last-child td {
     border-bottom: none;
   }
@@ -43,4 +47,14 @@
     color: var(--text-muted);
     text-decoration: line-through;
   }
+}
+
+.status-wrapper {
+  width: 100px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
 }

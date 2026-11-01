@@ -1,6 +1,10 @@
 import type { User } from '@/features/auth/model/types';
 import type { ListDTO } from '@/features/lists/api/types';
-import type { TaskDTO } from '@/features/tasks/api/types';
+import type {
+   TaskDataInput,
+   TaskDTO,
+   TaskStatusDTO,
+} from '@/features/tasks/api/types';
 
 import { createMockData, type MockStore } from './mockData';
 import { getTaskDeadlineStatus } from './utils/getTaskDeadlineStatus';
@@ -82,9 +86,11 @@ export const listsTable = {
          return false;
       }
 
+      const updated = { ...currentList, name: newName };
+
       const updatedLists = store.lists.map((list) => {
-         if (list.id === listId) {
-            return { ...list, name: newName };
+         if (list.id === updated.id) {
+            return updated;
          } else {
             return list;
          }
@@ -92,22 +98,68 @@ export const listsTable = {
 
       commit({ ...store, lists: updatedLists });
 
-      return currentList;
+      return updated;
    },
 };
 
 export const tasksTable = {
-   getTasksByListId: (listId: string): TaskDTO[] => {
+   getTasksByListId: (listId: string, status?: TaskStatusDTO): TaskDTO[] => {
       const now: Date = new Date();
 
       const tasks = store.tasks
-         .filter((task) => task.listId === listId)
+         .filter((task) => {
+            return (
+               task.listId === listId &&
+               (status === undefined || status === task.status)
+            );
+         })
          .map((task) => ({
             ...task,
             deadlineStatus: getTaskDeadlineStatus(task, now),
          }));
 
       return sortTasks(tasks, now);
+   },
+   getTask: (taskId: string) => {
+      return store.tasks.find((task) => task.id === taskId);
+   },
+   deleteTask: (taskId: string) => {
+      if (!tasksTable.getTask(taskId)) {
+         return false;
+      }
+
+      const updatedTasks = store.tasks.filter((task) => task.id !== taskId);
+
+      commit({ ...store, tasks: updatedTasks });
+
+      return true;
+   },
+   addTask: (listId: string, data: TaskDataInput): TaskDTO => {
+      const task: Omit<TaskDTO, 'deadlineStatus'> = {
+         ...data,
+         id: crypto.randomUUID(),
+         listId,
+      };
+
+      commit({ ...store, tasks: [...store.tasks, task] });
+
+      return { ...task, deadlineStatus: getTaskDeadlineStatus(task) };
+   },
+   updateTask: (id: string, data: Partial<TaskDataInput>) => {
+      const task = tasksTable.getTask(id);
+
+      if (!task) {
+         return false;
+      }
+
+      const updated = { ...task, ...data };
+
+      commit({
+         ...store,
+         tasks: store.tasks.map((item) => (item.id === id ? updated : item)),
+      });
+
+      return { ...updated, deadlineStatus: getTaskDeadlineStatus(updated) };
    },
 };
 

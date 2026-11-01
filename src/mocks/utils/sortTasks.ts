@@ -7,11 +7,10 @@ export const sortTasks = (tasks: readonly TaskDTO[], now: Date): TaskDTO[] => {
       const aDone = a.status === 'done';
       const bDone = b.status === 'done';
 
-      if (aDone && bDone) return 0;
-
       if (aDone !== bDone) {
          return aDone ? 1 : -1;
       }
+      if (aDone && bDone) return 0;
 
       const aOverdue = isTaskOverdue(a, now);
       const bOverdue = isTaskOverdue(b, now);
@@ -19,6 +18,9 @@ export const sortTasks = (tasks: readonly TaskDTO[], now: Date): TaskDTO[] => {
       if (aOverdue !== bOverdue) {
          return aOverdue ? -1 : 1;
       }
+
+      if (!a.deadline && b.deadline) return 1;
+      if (a.deadline && !b.deadline) return -1;
 
       if (a.deadline && b.deadline) {
          const aTime = new Date(a.deadline).getTime();
