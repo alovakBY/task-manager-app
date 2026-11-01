@@ -2,7 +2,7 @@
 
 Тестовое задание: списки задач, задачи со статусами, приоритетами и дедлайнами, авторизация, светлая/тёмная/системная тема.
 
-- **Live demo:** `https://alovakby.github.io/task-manager-app/`
+- **Live demo:** `https://testtask-task-manager.netlify.app/`
 - **Демо-аккаунт:** `admin@example.com` / `Admin123!`
 
 ## Стек
