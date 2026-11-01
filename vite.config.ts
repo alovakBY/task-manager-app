@@ -7,6 +7,7 @@ export default defineConfig({
       tsconfigPaths: true,
    },
    plugins: [react()],
+   base: '/task-manager-app/',
    css: {
       modules: {
          localsConvention: 'camelCaseOnly',
