@@ -21,7 +21,7 @@ async function enableMocking() {
 
    return worker.start({
       serviceWorker: {
-         url: `${import.meta.env.BASE_URL}mockServiceWorker.js`,
+         url: '/mockServiceWorker.js',
       },
    });
 }

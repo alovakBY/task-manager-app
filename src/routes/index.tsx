@@ -35,48 +35,43 @@ const withSuspense = (Component: React.ComponentType) => (
    </Suspense>
 );
 
-const routerConfig = createBrowserRouter(
-   [
-      {
-         path: PATHS.BASE,
-         element: <AppLayout />,
-         children: [
-            {
-               index: true,
-               element: <Navigate replace to={PATHS.LISTS} />,
-            },
-            {
-               path: PATHS.LOGIN,
-               element: withSuspense(LoginPage),
-            },
-            {
-               element: <ProtectedRoute />,
-               children: [
-                  {
-                     path: PATHS.LISTS,
-                     element: withSuspense(ListsPage),
-                  },
-                  {
-                     path: PATHS.LIST_DETAIL,
-                     element: withSuspense(ListDetailPage),
-                  },
-                  {
-                     path: PATHS.TASK_DETAIL,
-                     element: withSuspense(TaskDetailPage),
-                  },
-               ],
-            },
-            {
-               path: '*',
-               element: <Navigate replace to={`/${PATHS.LISTS}`} />,
-            },
-         ],
-      },
-   ],
+const routerConfig = createBrowserRouter([
    {
-      basename: import.meta.env.DEV ? '' : '/task-manager-app',
+      path: PATHS.BASE,
+      element: <AppLayout />,
+      children: [
+         {
+            index: true,
+            element: <Navigate replace to={PATHS.LISTS} />,
+         },
+         {
+            path: PATHS.LOGIN,
+            element: withSuspense(LoginPage),
+         },
+         {
+            element: <ProtectedRoute />,
+            children: [
+               {
+                  path: PATHS.LISTS,
+                  element: withSuspense(ListsPage),
+               },
+               {
+                  path: PATHS.LIST_DETAIL,
+                  element: withSuspense(ListDetailPage),
+               },
+               {
+                  path: PATHS.TASK_DETAIL,
+                  element: withSuspense(TaskDetailPage),
+               },
+            ],
+         },
+         {
+            path: '*',
+            element: <Navigate replace to={PATHS.LISTS} />, // Наш чистый редирект без слэша
+         },
+      ],
    },
-);
+]); // <-- Больше никаких вторых аргументов и basename!
 
 export const AppRouter = () => {
    return <RouterProvider router={routerConfig} />;
