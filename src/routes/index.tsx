@@ -5,7 +5,7 @@ import { Loader } from '@/shared/view/components/Loader/Loader';
 
 import { PATHS } from './constants';
 import { ProtectedRoute } from './ProtectedRoute';
-import { AppLayout } from '../shared/view/layouts/AppLayout/AppLayout';
+import { AppLayout } from '@/shared/view/layouts/AppLayout/AppLayout';
 
 const LoginPage = lazy(() =>
    import('@/pages/Login/LoginPage').then((module) => ({

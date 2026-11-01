@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { AppRouter } from './routes';
 
+import '@/shared/view/styles/index.scss';
+
 const queryClient = new QueryClient({
    defaultOptions: {
       queries: {
@@ -13,8 +15,6 @@ const queryClient = new QueryClient({
       },
    },
 });
-
-import '@/shared/view/styles/index.scss';
 
 async function enableMocking() {
    const { worker } = await import('./mocks/browser');
