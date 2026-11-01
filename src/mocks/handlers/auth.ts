@@ -1,4 +1,4 @@
-import { http, HttpResponse } from 'msw';
+import { delay, http, HttpResponse } from 'msw';
 
 import { ENDPOINTS, getEndpointWithBaseUrl } from '@/api/constants';
 import type { SignInDTO, User } from '@/features/auth/api/types';
@@ -10,6 +10,7 @@ export const authHandlers = [
    http.post<never, SignInDTO>(
       getEndpointWithBaseUrl(ENDPOINTS.AUTH_LOGIN),
       async ({ request }) => {
+         await delay(100);
          const { email, password } = await request.json();
 
          if (email === 'admin@example.com' && password === 'Admin123!') {
@@ -28,23 +29,24 @@ export const authHandlers = [
    ),
 
    // logout
-   http.get<never, never, null>(
-      getEndpointWithBaseUrl(ENDPOINTS.AUTH_LOGOUT),
-      () => {
-         authService.clear();
+   http.post(getEndpointWithBaseUrl(ENDPOINTS.AUTH_LOGOUT), async () => {
+      await delay(100);
+      authService.clear();
 
-         return HttpResponse.json(null, { status: 204 });
-      },
-   ),
+      return HttpResponse.json(null, { status: 204 });
+   }),
 
    // me
-   http.get<never, never, { user: User; isAuth: true }>(
+   http.get<never, never, { user: User | null; isAuth: boolean }>(
       getEndpointWithBaseUrl(ENDPOINTS.AUTH_ME),
       () => {
          const user = authService.get();
 
          if (!user) {
-            return new HttpResponse(null, { status: 401 });
+            return new HttpResponse(
+               { isAuth: false, user: null },
+               { status: 200 },
+            );
          }
 
          return HttpResponse.json({ isAuth: true, user });

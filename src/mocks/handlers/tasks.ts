@@ -6,6 +6,7 @@ import type { TaskDataInput, TaskDTO } from '@/features/tasks/api/types';
 
 import { listsTable, tasksTable } from '../db';
 import { getNotFoundResponse } from '../utils/getNotFoundResponse';
+import { requireSession } from '../utils/requireSession';
 
 export const tasksHandlers = [
    // get task
@@ -13,6 +14,9 @@ export const tasksHandlers = [
       getEndpointWithBaseUrl(ENDPOINTS.TASK),
       async ({ params }) => {
          await delay(100);
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          const { id } = params;
 
@@ -29,6 +33,9 @@ export const tasksHandlers = [
       async ({ params }) => {
          await delay(100);
 
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
+
          const { id } = params;
 
          const list = tasksTable.deleteTask(id);
@@ -43,6 +50,9 @@ export const tasksHandlers = [
       getEndpointWithBaseUrl(ENDPOINTS.TASKS_BY_LIST_ID),
       async ({ params, request }) => {
          await delay(100);
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          if (!listsTable.getList(params.id)) {
             return getNotFoundResponse();
@@ -60,6 +70,9 @@ export const tasksHandlers = [
       getEndpointWithBaseUrl(ENDPOINTS.TASK),
       async ({ params, request }) => {
          await delay();
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          const data = await request.json();
 

@@ -7,11 +7,15 @@ import { listsTable, tasksTable } from '../db';
 import { taskStatusSchema } from '../schemas';
 import { getListStats } from '../utils/getListStats';
 import { getNotFoundResponse } from '../utils/getNotFoundResponse';
+import { requireSession } from '../utils/requireSession';
 
 export const listsHandlers = [
    // get lists
    http.get(getEndpointWithBaseUrl(ENDPOINTS.LISTS), async ({ request }) => {
       await delay(100);
+
+      const unauthorized = requireSession();
+      if (unauthorized) return unauthorized;
 
       const search = new URL(request.url).searchParams.get('search') ?? '';
 
@@ -28,6 +32,9 @@ export const listsHandlers = [
       async ({ params }) => {
          await delay(100);
 
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
+
          const { id } = params;
 
          const list = listsTable.getList(id);
@@ -42,6 +49,9 @@ export const listsHandlers = [
       getEndpointWithBaseUrl(ENDPOINTS.LISTS),
       async ({ request }) => {
          await delay(100);
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          const { name } = await request.json();
 
@@ -58,6 +68,9 @@ export const listsHandlers = [
       async ({ params }) => {
          await delay(100);
 
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
+
          const { id } = params;
 
          const list = listsTable.deleteList(id);
@@ -72,6 +85,9 @@ export const listsHandlers = [
       getEndpointWithBaseUrl(ENDPOINTS.LIST),
       async ({ params, request }) => {
          await delay(100);
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          const { name } = await request.json();
 
@@ -94,6 +110,9 @@ export const listsHandlers = [
       getEndpointWithBaseUrl(`${ENDPOINTS.TASKS_BY_LIST_ID}`),
       async ({ params, request }) => {
          await delay(100);
+
+         const unauthorized = requireSession();
+         if (unauthorized) return unauthorized;
 
          const { id } = params;
 

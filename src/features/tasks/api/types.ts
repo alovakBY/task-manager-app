@@ -18,7 +18,7 @@ export type TaskDTO = {
    id: string;
    listId: string;
    title: string;
-   description: string;
+   description?: string;
    status: TaskStatusDTO;
    priority: TaskPriorityDTO;
    deadlineStatus: TaskDeadlineStatusDTO;

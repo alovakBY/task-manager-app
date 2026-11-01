@@ -4,6 +4,8 @@ import { ArrowLeftIcon, PlusIcon } from '@radix-ui/react-icons';
 
 import { useList } from '@/features/lists/api/useList';
 import type { TaskDTO, TaskStatusDTO } from '@/features/tasks/api/types';
+import { useTasks } from '@/features/tasks/api/useTasks';
+import { useUpdateTask } from '@/features/tasks/api/useUpdateTask';
 import { isTaskStatus } from '@/features/tasks/model/types';
 import { CreateTaskDialog } from '@/features/tasks/view/CreateTaskDialog/CreateTaskDialog';
 import { DeleteTaskDialog } from '@/features/tasks/view/DeleteTaskDialog/DeleteTaskDialog';
@@ -26,11 +28,19 @@ export const ListDetailPage = () => {
 
    const { listId = '' } = useParams();
    const [searchParams, setSearchParams] = useSearchParams();
-
-   const { isPending, data: list } = useList(listId);
-
    const statusParam = searchParams.get(STATUS_PARAM_NAME);
    const statusFilter = isTaskStatus(statusParam) ? statusParam : null;
+
+   const { isPending, data: list } = useList(listId);
+   const { mutate, isPending: updateTaskPending } = useUpdateTask();
+   const { data: tasks = [], isPending: isTasksPending } = useTasks(
+      listId,
+      statusFilter,
+   );
+
+   const onUpdateTask = (taskId: string, status: TaskStatusDTO) => {
+      mutate({ id: taskId, data: { status } });
+   };
 
    if (isPending) {
       return <Loader isFullScreen />;
@@ -71,11 +81,14 @@ export const ListDetailPage = () => {
             </Button>
          </header>
          <TasksTable
-            listId={listId}
             statusFilter={statusFilter}
+            tasks={tasks}
+            tasksPending={isTasksPending}
             onEdit={setUpdatedTask}
             onDelete={setDeletedTask}
             onCreate={() => setCreateDialogOpen(true)}
+            onUpdate={onUpdateTask}
+            updateTaskPending={updateTaskPending}
          />
          <CreateTaskDialog
             listId={listId}

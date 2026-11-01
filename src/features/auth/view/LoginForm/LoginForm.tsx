@@ -1,27 +1,27 @@
 import { useEffect, useEffectEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import cn from 'clsx';
 
-import { ROUTES } from '@/routes/constants';
 import { Button } from '@/shared/view/components/Button/Button';
 import { Input } from '@/shared/view/components/Input/Input';
 
-import { useLogin } from '../../api/useLogin';
 import { type LoginFormData, loginSchema } from '../../model/loginSchema';
 
 import styles from './LoginForm.module.scss';
 
 type ZodValidationErrors = Partial<Record<keyof LoginFormData, string>>;
 
-export const LoginForm = () => {
-   const navigate = useNavigate();
+type Props = {
+   onSubmit: (data: LoginFormData) => void;
+   reset: () => void;
+   isPending: boolean;
+   apiError?: string;
+};
 
+export const LoginForm = ({ onSubmit, reset, isPending, apiError }: Props) => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
 
    const [errors, setErrors] = useState<ZodValidationErrors>({});
-
-   const { mutate, isPending, error: apiError, reset } = useLogin();
 
    const onReset = useEffectEvent(() => {
       if (apiError) {
@@ -39,9 +39,7 @@ export const LoginForm = () => {
       const validationResult = loginSchema.safeParse({ email, password });
 
       if (validationResult.success) {
-         mutate(validationResult.data, {
-            onSuccess: () => navigate(ROUTES.lists),
-         });
+         onSubmit(validationResult.data);
       } else {
          const formattedErrors =
             validationResult.error.issues.reduce<ZodValidationErrors>(
@@ -64,11 +62,12 @@ export const LoginForm = () => {
    return (
       <div className={styles.root}>
          <div
+            data-testId="apiError"
             className={cn(styles.error, {
                [styles.show]: apiError,
             })}
          >
-            {apiError?.response?.data?.message || 'Something went wrong'}
+            {apiError}
          </div>
          <div className={styles.form}>
             <Input
@@ -77,7 +76,10 @@ export const LoginForm = () => {
                type="email"
                placeholder="Email"
                value={email}
-               onChange={(e) => setEmail(e.target.value)}
+               onChange={(e) => {
+                  setEmail(e.target.value);
+                  setErrors((prev) => ({ ...prev, email: undefined }));
+               }}
                error={errors.email}
                disabled={isPending}
             />
@@ -87,7 +89,10 @@ export const LoginForm = () => {
                type="password"
                placeholder="Password"
                value={password}
-               onChange={(e) => setPassword(e.target.value)}
+               onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrors((prev) => ({ ...prev, password: undefined }));
+               }}
                error={errors.password}
                disabled={isPending}
             />

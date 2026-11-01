@@ -10,8 +10,6 @@ import { Loader } from '@/shared/view/components/Loader/Loader';
 import { StateMessage } from '@/shared/view/components/StateMessage/StateMessage';
 
 import type { TaskDTO, TaskStatusDTO } from '../../api/types';
-import { useTasks } from '../../api/useTasks';
-import { useUpdateTask } from '../../api/useUpdateTask';
 import { STATUS_LABELS } from '../../model/constants';
 import { DeadlineLabel } from '../DeadlineLabel/DeadlineLabel';
 import { StatusSelect } from '../StatusSelect/StatusSelect';
@@ -19,23 +17,26 @@ import { StatusSelect } from '../StatusSelect/StatusSelect';
 import styles from './TasksTable.module.scss';
 
 type Props = {
-   listId: string;
+   updateTaskPending: boolean;
+   tasksPending: boolean;
+   tasks: TaskDTO[];
    statusFilter: TaskStatusDTO | null;
    onEdit: (task: TaskDTO) => void;
    onDelete: (task: TaskDTO) => void;
    onCreate: () => void;
+   onUpdate: (taskId: string, status: TaskStatusDTO) => void;
 };
 
 export const TasksTable = ({
-   listId,
+   updateTaskPending,
+   tasks,
+   tasksPending,
    statusFilter,
    onEdit,
    onDelete,
    onCreate,
+   onUpdate,
 }: Props) => {
-   const { data: tasks = [], isPending } = useTasks(listId, statusFilter);
-   const { mutate } = useUpdateTask();
-
    const renderContent = () => {
       return (
          <table className={styles.table}>
@@ -67,11 +68,9 @@ export const TasksTable = ({
                               <StatusSelect
                                  value={task.status}
                                  onChange={(status) =>
-                                    mutate({
-                                       id: task.id,
-                                       data: { status },
-                                    })
+                                    onUpdate(task.id, status)
                                  }
+                                 isPending={updateTaskPending}
                               />
                            </div>
                         </td>
@@ -102,7 +101,7 @@ export const TasksTable = ({
       );
    };
 
-   if (isPending) {
+   if (tasksPending) {
       return <Loader />;
    }
 

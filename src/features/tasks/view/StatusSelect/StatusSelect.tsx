@@ -6,13 +6,24 @@ import { STATUS_LABELS, STATUS_OPTIONS } from '../../model/constants';
 
 type Props = {
    value: TaskStatusDTO;
+   isPending: boolean;
    onChange: (status: TaskStatusDTO) => void;
 };
 
-export const StatusSelect = ({ value, onChange }: Props) => {
+export const StatusSelect = ({ value, isPending, onChange }: Props) => {
    return (
       <DropdownMenu
-         trigger={<Button variant={'select'}>{STATUS_LABELS[value]}</Button>}
+         disabled={isPending}
+         trigger={
+            <Button
+               disabled={isPending}
+               variant={'select'}
+               data-testId="status-select"
+               aria-label={STATUS_LABELS[value]}
+            >
+               {STATUS_LABELS[value]}
+            </Button>
+         }
          items={STATUS_OPTIONS}
          value={value}
          onChange={onChange}

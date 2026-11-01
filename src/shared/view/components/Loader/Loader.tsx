@@ -16,7 +16,7 @@ export const Loader = ({ size = 'medium', isFullScreen = false }: Props) => {
             [styles.fullScren]: isFullScreen,
          })}
       >
-         <div className={loaderClass} role="status" aria-label="Загрузка">
+         <div className={loaderClass} role="status" aria-label="Loading">
             <div className={styles.circle} />
          </div>
       </div>

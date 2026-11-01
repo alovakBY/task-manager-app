@@ -9,12 +9,19 @@ type Props = {
    trigger: ReactNode;
    items: { value: string; label: ReactNode }[];
    onChange: (value: string) => void;
+   disabled?: boolean;
 };
 
-export const DropdownMenu = ({ trigger, value, items, onChange }: Props) => {
+export const DropdownMenu = ({
+   trigger,
+   value,
+   items,
+   disabled = false,
+   onChange,
+}: Props) => {
    return (
       <DropdownMenuRadix.Root>
-         <DropdownMenuRadix.Trigger asChild>
+         <DropdownMenuRadix.Trigger asChild disabled={disabled}>
             {trigger}
          </DropdownMenuRadix.Trigger>
 
@@ -30,7 +37,9 @@ export const DropdownMenu = ({ trigger, value, items, onChange }: Props) => {
                         onClick={() => onChange(item.value)}
                         className={cn(styles.item, {
                            [styles.active]: item.value === value,
+                           [styles.disabled]: disabled,
                         })}
+                        disabled={disabled}
                      >
                         {item.label}
                      </DropdownMenuRadix.Item>

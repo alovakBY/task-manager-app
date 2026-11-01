@@ -90,6 +90,7 @@ export const TaskForm = ({
                <StatusSelect
                   value={values.status}
                   onChange={(status) => setField('status', status)}
+                  isPending={isPending}
                />
             </div>
             <div className={styles.rowItem}>

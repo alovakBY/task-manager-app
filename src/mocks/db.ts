@@ -74,8 +74,9 @@ export const listsTable = {
       }
 
       const updatedLists = store.lists.filter((list) => list.id !== listId);
+      const updatedTasks = store.tasks.filter((task) => task.listId !== listId);
 
-      commit({ ...store, lists: updatedLists });
+      commit({ lists: updatedLists, tasks: updatedTasks });
 
       return true;
    },

@@ -7,7 +7,7 @@ export type MockStore = {
 };
 
 const HOUR_MS = 60 * 60 * 1000;
-const hoursFromNow = (h: number) =>
+export const hoursFromNow = (h: number) =>
    new Date(new Date().getTime() + h * HOUR_MS).toISOString();
 
 const createTask = (
