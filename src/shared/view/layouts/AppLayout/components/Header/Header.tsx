@@ -7,6 +7,8 @@ import { useLogout } from '@/features/auth/api/useLogout';
 import { IconButton } from '@/shared/view/components/IconButton/IconButton';
 
 import styles from './Header.module.scss';
+import { ROUTES } from '@/routes/constants';
+import { Link } from 'react-router-dom';
 
 export const Header = () => {
    const { theme, setTheme } = useTheme();
@@ -14,10 +16,10 @@ export const Header = () => {
 
    return (
       <div className={styles.root}>
-         <div className={styles.logoWrapper}>
+         <Link to={ROUTES.lists} className={styles.logoWrapper}>
             <FileTextIcon className={styles.logo} />
             <span className={styles.logoText}>Taskers</span>
-         </div>
+         </Link>
          <div className={styles.icons}>
             <ThemeSwitcher theme={theme} onChangeTheme={setTheme} />
             <IconButton
